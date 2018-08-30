@@ -76,10 +76,10 @@ while getopts ":p:b:h:a:" opt; do
       echo "echo project : $OPTARG"
       if [ $OPTARG == "backend" ]; then
         project="backend"
-        git_repo="/var/lib/jenkins/workspace/kl-agent-backend"
+        git_repo="/var/lib/jenkins/workspace/kl-agent-server/kl-agent-backend"
       elif [ $OPTARG == "frontend" ]; then
         project="frontend"
-        git_repo="/var/lib/jenkins/workspace/kl-agent-frontend"
+        git_repo="/var/lib/jenkins/workspace/kl-agent-server/kl-agent-frontend"
       else
         echo "input string is error"
         exit 1
@@ -132,7 +132,7 @@ function action() {
     backenddev
   elif [ $project == "frontend" ]; then
     frontenddev
-    
+  fi    
 }
 
 

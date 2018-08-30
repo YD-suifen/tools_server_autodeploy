@@ -12,10 +12,10 @@ while getopts ":p:b:h:a:" opt; do
       echo "echo project : $OPTARG"
       if [ $OPTARG == "backend" ]; then
         project="backend"
-        git_repo="/var/lib/jenkins/workspace/kl-agent-backend"
+        git_repo="/var/lib/jenkins/workspace/kl-agent-server/kl-agent-backend"
       elif [ $OPTARG == "frontend" ]; then
         project="frontend"
-        git_repo="/var/lib/jenkins/workspace/kl-agent-frontend"
+        git_repo="/var/lib/jenkins/workspace/kl-agent-server/kl-agent-frontend"
       else
         echo "input string is error"
         exit 1
@@ -47,60 +47,6 @@ while getopts ":p:b:h:a:" opt; do
   esac
 done
 
-# until [ -z "$1" ]
-# do
-#   case $1 in
-#     -project)
-#       shift;project=$1;echo $project;shift
-#       echo "made bazi"
-#       ;;
-#     -branch)
-#       shift;branch=$1;echo $branch;shift
-#       ;;
-#     *)
-#       echo "---"
-#       exit 1
-#       ;;
-#   esac
-# done
-
-
-
-
-# if [ $project == "backend" ]; then
-#   git_repo="/var/lib/jenkins/workspace/kl-agent-backend"
-# elif [ $project == "frontend" ]; then
-#   git_repo="/var/lib/jenkins/workspace/kl-agent-frontend"
-# else
-#   echo "project error"
-#   exit 1
-# fi
-
-
-
-# if [ $branch == "master" ]; then
-#   branch="master"
-#   echo "master" + $branch
-# elif [ $branch == "pomelo_client" ]; then
-#   branch="pomelo_client"
-#   echo "pomelo_client" + $branch
-# else
-#   echo "input string is error"
-#   exit 1
-# fi
-
-
-
-# cd $git_repo
-# /usr/bin/git checkout $branch && /usr/bin/git pull
-
-# /usr/bin/yarn install
-# /usr/local/bin/npm run build
-
-# /usr/bin/tar -czf $project.tar.gz dist
-
-
-# function
 
 function action() {
   if [ $all == "all" ]; then
@@ -108,7 +54,7 @@ function action() {
     for i in $projectlist
     do
       if [ $i == "backend" ]; then
-        git_repo="/var/lib/jenkins/workspace/kl-agent-backend"
+        git_repo="/var/lib/jenkins/workspace/kl-agent-server/kl-agent-backend"
         cd $git_repo
         /usr/bin/git checkout $branch && /usr/bin/git pull
         /usr/bin/yarn install
@@ -116,7 +62,7 @@ function action() {
         /usr/bin/tar -czf $i.tar.gz dist
 
       elif [ $i == "frontend" ]; then  
-        git_repo="/var/lib/jenkins/workspace/kl-agent-frontend"
+        git_repo="/var/lib/jenkins/workspace/kl-agent-server/kl-agent-frontend"
         cd $git_repo
         /usr/bin/git checkout $branch && /usr/bin/git pull
         /usr/bin/yarn install
@@ -135,8 +81,8 @@ function action() {
     /usr/bin/yarn install
     /usr/local/bin/npm run build
     /usr/bin/tar -czf $project.tar.gz dist
+  fi 
 }
 
 
 action
-
